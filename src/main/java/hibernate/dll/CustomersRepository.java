@@ -41,25 +41,23 @@ public class CustomersRepository implements Repository<CustomersDao>{
 
     @Override
     public void update(CustomersDao customersDao) {
-
+        Session session = util.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.merge(customersDao);
+        transaction.commit();
+        session.close();
     }
 
-    private CustomersDao getById(Long id){
+    public CustomersDao getById(Long id){
         Session session = util.getSessionFactory().openSession();
         CustomersDao customersDao = session.get(CustomersDao.class, id);
         session.close();
         return customersDao;
     }
 
-    //            Query<Long> query = session.createQuery(
-//                    "select count(id) from Ticket t WHERE t.to = :to",
-//                    Long.class);
-//            query.setParameter("to", planet);
-//            return query.getSingleResult();
-
     public CompaniesDao getCompaniesByName(String name){
         Session session = util.getSessionFactory().openSession();
-        Query<CompaniesDao> query = session.createQuery("from CompaniesDao c where c.name_company = :name", CompaniesDao.class);
+        Query<CompaniesDao> query = session.createQuery("from CompaniesDao where name = :name", CompaniesDao.class);
         query.setParameter("name",name);
         CompaniesDao singleResult = query.getSingleResult();
         session.close();

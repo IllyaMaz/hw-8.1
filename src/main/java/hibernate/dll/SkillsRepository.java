@@ -1,9 +1,11 @@
 package hibernate.dll;
 
+import entity.DevelopersDao;
 import entity.SkillsDao;
 import hibernate.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -20,7 +22,11 @@ public class SkillsRepository implements Repository<SkillsDao>{
 
     @Override
     public void save(SkillsDao skillsDao) {
-
+        Session session = util.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.persist(skillsDao);
+        transaction.commit();
+        session.close();
     }
 
     @Override
@@ -34,13 +40,26 @@ public class SkillsRepository implements Repository<SkillsDao>{
 
     @Override
     public void update(SkillsDao skillsDao) {
-
+        Session session = util.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.merge(skillsDao);
+        transaction.commit();
+        session.close();
     }
 
-    private SkillsDao getById(Long id){
+    public SkillsDao getById(Long id){
         Session session = util.getSessionFactory().openSession();
         SkillsDao skillsDao = session.get(SkillsDao.class, id);
         session.close();
         return skillsDao;
+    }
+
+    public DevelopersDao getDeveloperById(String name){
+        Session session = util.getSessionFactory().openSession();
+        Query<DevelopersDao> query = session.createQuery("from DevelopersDao where name = :name", DevelopersDao.class);
+        query.setParameter("name",name);
+        DevelopersDao singleResult = query.getSingleResult();
+        session.close();
+        return singleResult;
     }
 }

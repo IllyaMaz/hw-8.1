@@ -27,7 +27,7 @@
     <li class="nav-item">
         <a class="nav-link" href="/skills">Skills</a>
     </li>
-    <div class="dropdown">
+    <div class="dropdown" >
         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             Add
         </button>
@@ -54,43 +54,39 @@
     </div>
 </ul>
 
-<table class="table" >
-    <thead>
-    <tr >
-        <th scope="col" >#</th>
-        <th scope="col">Skills</th>
-        <th scope="col">Level</th>
-        <th scope="col">Developer</th>
-        <th scope="col">Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="skill: ${skills}">
-        <th scope="row" th:text="${skill.id}"></th>
-        <td >
-            <div th:if="${skill.name} == null">null</div>
-            <div th:unless="${skill.name} == null" th:text="${skill.name}"></div>
-        </td>
-        <td >
-            <div th:if="${skill.level} == null">null</div>
-            <div th:unless="${skill.level} == null" th:text="${skill.level}"></div>
-        </td>
+<form class="row g-3" method="post" action="/skills/chenge">
+    <div class="col-md-6" style="margin: auto; width: 30%; margin-top: 5%">
+        <label for="id" class="form-label">#</label>
+        <input type="text" class="form-control" id="id" name="id" >
+    </div>
 
-        <td>
-            <div th:if="${skill.developersDao} == null">null</div>
-            <div th:unless="${skill.developersDao} == null" th:text="${skill.developersDao.name}"></div>
-        </td>
+    <div style="flex-basis: 100%"></div>
 
-        <td >
-            <form action="/skills/delete" method="post">
-                <input type="hidden" th:value="${skill.id}" name="id">
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <div class="col-md-6" style="margin: auto; width: 30%">
+        <label for="name" class="form-label">New Skill</label>
+        <input type="text" class="form-control" id="name" name="name">
+    </div>
+
+    <div style="flex-basis: 100%"></div>
+
+    <div class="col-md-6" style="margin: auto; width: 30%">
+        <label for="name" class="form-label">New Level</label>
+        <input type="text" class="form-control" id="name" name="level">
+    </div>
+
+    <div style="flex-basis: 100%"></div>
+
+    <div class="col-md-6" style="margin: auto; width: 30%">
+        <label for="name" class="form-label">New Developer</label>
+        <input type="text" class="form-control" id="name" name="nameDeveloper">
+    </div>
+
+    <div class="col-12" style="margin-left: 540px">
+        <button class="btn btn-primary" type="submit">Chenge</button>
+    </div>
+</form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
 </body>
 </html>

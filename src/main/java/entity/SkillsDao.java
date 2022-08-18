@@ -10,10 +10,10 @@ public class SkillsDao {
     @Id
     private Long id;
 
-    @Column(name = "name_skill")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "level_skill")
+    @Column(name = "level")
     private String level;
 
     @ManyToOne

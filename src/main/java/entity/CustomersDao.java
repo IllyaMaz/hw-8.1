@@ -10,7 +10,7 @@ public class CustomersDao {
     @Id
     private Long id;
 
-    @Column(name = "first_name")
+    @Column(name = "name")
     private String name;
 
     @ManyToOne

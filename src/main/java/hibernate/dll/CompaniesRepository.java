@@ -39,10 +39,14 @@ public class CompaniesRepository implements Repository<CompaniesDao>{
 
     @Override
     public void update(CompaniesDao companiesDao) {
-
+        Session session = util.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.merge(companiesDao);
+        transaction.commit();
+        session.close();
     }
 
-    private CompaniesDao getById(Long id){
+    public CompaniesDao getById(Long id){
         Session session = util.getSessionFactory().openSession();
         CompaniesDao companiesDao = session.get(CompaniesDao.class, id);
         session.close();

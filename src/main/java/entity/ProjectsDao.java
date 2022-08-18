@@ -10,7 +10,7 @@ public class ProjectsDao {
     @Id
     private Long id;
 
-    @Column(name = "name_project")
+    @Column(name = "name")
     private String name;
 
     @Column

@@ -13,6 +13,6 @@ public class CompaniesDao {
     @Id
     private Long id;
 
-    @Column(name = "name_company")
+    @Column(name = "name")
     private String name;
 }
