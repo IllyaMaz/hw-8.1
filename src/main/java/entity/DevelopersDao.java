@@ -2,6 +2,8 @@ package entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Table(name = "developers")
 @Entity
@@ -22,7 +24,8 @@ public class DevelopersDao {
     @Column
     private Integer salary;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "id_project")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ProjectsDao projectsDao;
 }
